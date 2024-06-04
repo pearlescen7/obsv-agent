@@ -1,3 +1,3 @@
-# libbpf Scaffold
+# obsv-agent
 
-Base project to start building eBPF programs using libbpf. Modify source files and run run\_build.sh. 
+Run run\_build.sh to build.
