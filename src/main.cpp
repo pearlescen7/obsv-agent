@@ -1,6 +1,6 @@
 #include <argp.h>
 
-#include "utils.h"
+#include "utils.hpp"
 #include "obsv_agent.hpp"
 
 static struct env {
@@ -29,7 +29,7 @@ static error_t parse_arg(int key, char *arg, struct argp_state *state)
 	case 'p':
 		env.port = std::uint16_t(std::stoi(arg));
         if(env.port < 0) {
-            log_error("Invalid port number");
+            utils::log_error("Invalid port number");
             argp_usage(state);
         }
 		break;

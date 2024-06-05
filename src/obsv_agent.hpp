@@ -1,12 +1,23 @@
+#pragma once
+
 #include <map>
 #include <string>
-
+#include <functional>
 
 #include <bpf/libbpf.h>
 
 #include "crow.h"
 #include "obsv_agent.skel.h"
 
+struct prog_data_t {
+    bool enabled{};             //Enable/disable status
+    bpf_link* link_p{};         //Link pointer to attached program
+    bpf_program* prog_p{};      //Program pointer loaded from bpf object
+
+    //In case custom action needed for each program while enabling/disabling
+    //Use something like this => std::function<...> enabler, disabler;
+    //And remove prog_p possibly
+};
 
 class ObsvAgent {
 public:
@@ -25,10 +36,5 @@ private:
     obsv_agent_bpf* obj_p;
     crow::SimpleApp app;
 
-    // std::map<std::string, bpf_link*> links;
+    std::unordered_map<std::string, prog_data_t> prog_data_map;
 };
-
-// auto a = { 
-//     {"sched_switch"} : {false, link_ptr},
-//     {}
-// }

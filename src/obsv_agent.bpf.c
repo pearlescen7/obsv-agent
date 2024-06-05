@@ -5,6 +5,7 @@
 
 #include "bpf_progs.h"
 
+char _license[] SEC("license") = "GPL";
 
 /////////////////////////////
 // BPF Program definitions //
